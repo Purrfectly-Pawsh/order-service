@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:13
+    volumes:
+      - ./:/app/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - order-nw
+
+  order-service:
+    command: java -jar target/OrderMicroService-0.0.1-SNAPSHOT.jar
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+    depends_on:
+      - database
+    volumes:
+      - ./:/app/app
+    links:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_RABBITMQ_HOST=rabbitmq-container
+      - SPRING_RABBITMQ_PORT=5672
+    networks:
+      - order-nw
+      - service-nw
+
+networks:
+  order-nw:
+    name: order-nw
+  service-nw:
+    name: service-nw
+    external: true
