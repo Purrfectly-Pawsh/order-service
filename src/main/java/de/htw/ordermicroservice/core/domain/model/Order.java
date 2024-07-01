@@ -1,14 +1,13 @@
 package de.htw.ordermicroservice.core.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "previous_orders")
 public class Order {
 
     @Id
@@ -23,8 +23,11 @@ public class Order {
     private UUID id;
     private UUID userId;
     private String email;
+    private String address;
+    @Column(length = 2000)
     private String invoiceUrl;
     private String totalCost;
-    //private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderItem> products;
 
 }
