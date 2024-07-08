@@ -14,6 +14,8 @@ public class OrderMessage {
     private String address;
     private String invoiceUrl;
     private String totalCost;
+    private String productId;
+    private String imageUrl;
     private List<OrderItem> items;
 
 }

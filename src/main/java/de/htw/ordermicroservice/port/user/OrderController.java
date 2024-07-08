@@ -20,7 +20,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/order/{userId}")
+    @GetMapping("/orders/{userId}")
     public List<Order> getAllOrdersOfOneUser(@PathVariable UUID userId) {
         log.info("order");
         return orderService.getAllOrdersOfOneUser(userId);
