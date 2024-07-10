@@ -22,7 +22,6 @@ public class OrderController {
 
     @GetMapping("/orders/{userId}")
     public List<Order> getAllOrdersOfOneUser(@PathVariable UUID userId) {
-        log.info("order");
         return orderService.getAllOrdersOfOneUser(userId);
     }
 
