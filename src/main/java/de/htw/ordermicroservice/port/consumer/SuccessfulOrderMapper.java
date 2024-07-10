@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.UUID;
 
 @Slf4j
-public class CheckoutMapper {
-    public static Order toOrder(OrderMessage message) {
+public class SuccessfulOrderMapper {
+    public static Order toOrder(SuccessfulOrderMessage message) {
         Order order = Order.builder()
                 .userId(UUID.fromString(message.getUserId()))
                 .email(message.getEmail())

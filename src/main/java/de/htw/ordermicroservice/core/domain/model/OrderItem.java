@@ -20,8 +20,9 @@ public class OrderItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String productId;
-    private String description;
+    private String name;
     private long quantity;
+    private String imageUrl;
     private Double price;
 
 }

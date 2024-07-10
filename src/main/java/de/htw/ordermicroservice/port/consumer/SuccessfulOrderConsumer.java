@@ -9,19 +9,19 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class OrderConsumer {
+public class SuccessfulOrderConsumer {
 
     private final IOrderService orderService;
 
-    public OrderConsumer(IOrderService orderService) {
+    public SuccessfulOrderConsumer(IOrderService orderService) {
         this.orderService = orderService;
     }
 
     @RabbitListener(queues = RabbitMQConfig.CREATE_ORDER_QUEUE)
 
-    public void receiveOrderEvent(OrderMessage message) {
+    public void receiveOrderEvent(SuccessfulOrderMessage message) {
         try{
-            Order order = CheckoutMapper.toOrder(message);
+            Order order = SuccessfulOrderMapper.toOrder(message);
             orderService.addOrder(order);
         } catch ( Exception e ) {
             log.info(e.getMessage());

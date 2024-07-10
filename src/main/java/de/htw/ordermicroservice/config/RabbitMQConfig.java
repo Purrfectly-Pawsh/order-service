@@ -37,7 +37,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public RabbitTemplate orderTemplate(ConnectionFactory connectionFactory) {
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(messageConverter());
         return template;
